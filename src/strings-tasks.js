@@ -374,7 +374,10 @@ function findLongestWord(sentence) {
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
 function reverseWords(str) {
-  return str.split(' ').map(word => word.split('').reverse().join('')).join(' ');
+  return str
+    .split(' ')
+    .map((word) => word.split('').reverse().join(''))
+    .join(' ');
 }
 
 /**
@@ -391,12 +394,11 @@ function reverseWords(str) {
 function invertCase(str) {
   return str
     .split('')
-    .map(char => {
+    .map((char) => {
       if (char === char.toUpperCase()) {
         return char.toLowerCase();
-      } else {
-        return char.toUpperCase();
       }
+      return char.toUpperCase();
     })
     .join('');
 }
@@ -468,7 +470,7 @@ function unbracketTag(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-  return str.split(';').filter(email => email.trim() !== '');
+  return str.split(';').filter((email) => email.trim() !== '');
 }
 
 /**
@@ -488,11 +490,12 @@ function extractEmails(str) {
  *
  */
 function encodeToRot13(str) {
-  return str.replace(/[A-Za-z]/g, function (char) {
+  function replaceChar(char) {
     const charCode = char.charCodeAt(0);
     const shift = char <= 'Z' ? 65 : 97;
     return String.fromCharCode(((charCode - shift + 13) % 26) + shift);
-  });
+  }
+  return str.replace(/[A-Za-z]/g, replaceChar);
 }
 /**
  * Returns playid card id.
@@ -571,7 +574,7 @@ function getCardId(value) {
     '10♠',
     'J♠',
     'Q♠',
-    'K♠'
+    'K♠',
   ];
   return cardsDeck.indexOf(value);
 }

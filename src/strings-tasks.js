@@ -117,14 +117,7 @@ function removeLeadingWhitespaces(/* value */) {
  *   removeTrailingWhitespaces('\t\t\tHello, World! ') => '\t\t\tHello, World!'
  */
 function removeTrailingWhitespaces(value) {
-  const trimmedValue = value;
-
-  let endIndex = trimmedValue.length - 1;
-
-  while (endIndex >= 0 && trimmedValue[endIndex] === ' ') {
-    endIndex -= 1;
-  }
-  return trimmedValue.substring(0, endIndex + 1);
+  return value.trimEnd();
 }
 /**
  * Returns a string that is repeated the specified number of times.
@@ -159,7 +152,11 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
+  const index = str.indexOf(value);
+  if (index === -1) {
+    return str;
+  }
+  return str.slice(0, index) + str.slice(index + value.length);
 }
 
 /**
